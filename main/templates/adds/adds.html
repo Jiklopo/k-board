@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block main %}
+    {% if adds %}
+        <ul>
+            {% for add in adds %}
+                <li>{{ add.title}}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Netu :(</p>
+    {% endif %}
+{% endblock %}

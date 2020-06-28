@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>K-Board</title>
+    <link rel="stylesheet" href="style.css">
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+<header>
+    <h2><a href="/">K-Board</a></h2>
+    <ul>
+        <li><a href="/adds">Объявления</a></li>
+    </ul>
+</header>
+<main>
+    {% block main %}
+        <section id="404">
+            <h1>404</h1>
+            <p>Я что-то нажал и все исчезло!</p>
+        </section>
+    {% endblock %}
+</main>
+<footer>
+    Nu eto footer
+</footer>
+
+</body>
+</html>

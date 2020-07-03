@@ -32,7 +32,13 @@ class AddCategories(models.IntegerChoices):
 class Add(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     title = models.CharField(max_length=50)
-    description = models.TextField(max_length=250, blank=True)
-    created = models.DateTimeField(auto_created=True)
-    last_modified = models.DateTimeField(auto_now=True)
+    description = models.TextField(max_length=250, blank=True, null=True)
+    created = models.DateTimeField(editable=False)
+    last_modified = models.DateTimeField()
     category = models.IntegerField(AddCategories.choices)
+
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.created = datetime.datetime.now()
+        self.last_modified = datetime.datetime.now()
+        return super(Add, self).save(*args, **kwargs)

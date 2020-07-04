@@ -1,12 +1,9 @@
 from django.urls import reverse
 from django.views import generic
 from django.views.generic import FormView, TemplateView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from main.models import Add, UserInfo
 from main.forms import AddForm
-
-
-class IndexView(TemplateView):
-    pass
 
 
 class AddsListView(generic.ListView):
@@ -18,7 +15,7 @@ class AddDetailView(generic.DetailView):
     model = Add
 
 
-class AddFormView(FormView):
+class AddFormView(LoginRequiredMixin, FormView):
     form_class = AddForm
 
     def form_valid(self, form):

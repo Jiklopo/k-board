@@ -1,16 +1,15 @@
 from django.contrib.auth import views
 from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse
 from django.views import generic
 
 
 class LoginView(views.LoginView):
-    redirect_field_name = ''
-    redirect_authenticated_user = True
+    pass
 
 
 class LogoutView(views.LogoutView):
-    redirect_field_name = ''
-    redirect_authenticated_user = True
+    pass
 
 
 class RegistrationView(generic.CreateView):

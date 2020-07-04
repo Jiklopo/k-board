@@ -35,7 +35,7 @@ class Add(models.Model):
     description = models.TextField(max_length=250, blank=True, null=True)
     created = models.DateTimeField(editable=False)
     last_modified = models.DateTimeField()
-    category = models.IntegerField(AddCategories.choices)
+    category = models.IntegerField(choices=AddCategories.choices)
 
     def save(self, *args, **kwargs):
         if not self.id:

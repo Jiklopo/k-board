@@ -1,13 +1,15 @@
 from django.urls import path
-from main import views
+from main import views_adds, views_users
 
 app_name = 'main'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('adds/', views.adds, name='adds'),
-    path('adds/<int:add_id>', views.add, name='add_detail'),
-    path('adds/new/', views.add_form, name='new_add'),
+    path('', views_adds.IndexView.as_view(template_name='index.html'), name='index'),
+    path('adds/', views_adds.AddsListView.as_view(template_name='adds/adds.html'), name='adds'),
+    path('adds/<int:pk>/', views_adds.AddDetailView.as_view(template_name='adds/add.html'), name='add_detail'),
+    path('adds/<int:pk>/edit', views_adds.AddUpdateView.as_view(template_name='adds/form.html'), name='add_update'),
+    path('adds/new/', views_adds.AddFormView.as_view(template_name='adds/form.html'), name='new_add'),
 
-    path('login/', views.LoginView.as_view(template_name='users/login.html'), name='login'),
-    path('users/<int:user_id>', views.user, name='user_detail')
+    path('login/', views_users.LoginView.as_view(template_name='users/login.html'), name='login'),
+    path('logout/', views_users.LogoutView.as_view(), name='logout'),
+    path('register/', views_users.RegistrationView.as_view(template_name='users/register.html'))
 ]

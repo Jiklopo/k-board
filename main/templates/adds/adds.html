@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block main %}
-    {% if adds %}
+    {% if object_list %}
         <ul class="list-group">
-        {% for add in adds %}
+        {% for add in object_list %}
             <li class="list-group-item">
                 <h3><a href="{% url "main:add_detail" add.id %}">{{ add.title }}</a></h3>
                 <p>{{ add.description}}</p>

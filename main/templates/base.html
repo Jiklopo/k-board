@@ -27,10 +27,11 @@
     <a href="{% url 'main:adds' %}" class="">Adds</a>
     <a href="{% url 'main:new_add' %}" class="">New</a>
     {% if request.user.is_authenticated %}
-        <a href="">{{ request.user.username }}</a>
-        <a href="{% url 'main:logout' %}?next={{ request.path }}">Logout</a>
+        <a href="{% url 'main:profile' %}">{{ request.user.username }}</a>
+        <a href="{% url 'main:logout' %}">Logout</a>
     {% else %}
         <a href="{% url 'main:login' %}?next={{ request.path }}">Login</a>
+        <a href="{% url 'main:register' %}">Register</a>
     {% endif %}
 </header>
 <main class="container-fluid">

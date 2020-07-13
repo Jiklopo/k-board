@@ -6,7 +6,7 @@
             <li class="list-group-item">
                 <h3><a href="{% url "main:add_detail" add.id %}">{{ add.title }}</a></h3>
                 <p>{{ add.description}}</p>
-                <h6>{{ add.created }}</h6>
+                <h6>{{ add.user.username }} - {{ add.created }}</h6>
             </li>
         {% endfor %}
         </ul>

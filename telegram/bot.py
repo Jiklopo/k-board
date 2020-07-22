@@ -5,7 +5,7 @@ import os
 import telebot
 
 TOKEN = os.getenv('BOT_TOKEN')
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(TOKEN, threaded=False)
 link = f'{HEROKU_URL}{TOKEN}'
 webhook_info = bot.get_webhook_info()
 print(f'webhook url "{webhook_info.url}"')

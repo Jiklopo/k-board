@@ -9,6 +9,7 @@ urlpatterns = [
     path('adds/', views_adds.AddsListView.as_view(), name='adds'),
     path('adds/<int:pk>/', views_adds.AddDetailView.as_view(), name='add_detail'),
     path('adds/<int:pk>/edit', views_adds.AddUpdateView.as_view(), name='add_update'),
+    path('adds/<int:pk>/delete', views_adds.AddDeleteView.as_view(), name='add_delete'),
     path('adds/new/', views_adds.AddFormView.as_view(), name='new_add'),
 
     path('login/', views_users.LoginView.as_view(), name='login'),

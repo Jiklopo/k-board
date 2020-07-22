@@ -1,4 +1,4 @@
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 from django.views.generic import FormView, TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,6 +10,7 @@ class AddsListView(generic.ListView):
     template_name = 'adds/adds.html'
     model = Add
     paginate_by = 20
+    ordering = '-created'
 
 
 class AddDetailView(generic.DetailView):
@@ -28,7 +29,7 @@ class AddFormView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
 
-class AddUpdateView(generic.UpdateView):
+class AddUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = 'adds/form.html'
     model = Add
     form_class = AddForm
@@ -40,3 +41,10 @@ class AddUpdateView(generic.UpdateView):
         add.save()
         self.success_url = reverse('main:add_detail', args=[add.id])
         return super().form_valid(form)
+
+
+class AddDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Add
+
+    def get_success_url(self):
+        return self.request.GET.get('next') or reverse('main:profile')

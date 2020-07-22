@@ -1,8 +1,17 @@
 {% extends "base.html" %}
 {% block main %}
-    {% if add %}
+    <div>
         <h1>{{ add.title }}</h1>
-    {% else %}
-        <h1>E, cho, gde?!</h1>
+        <p>{{ add.description }}</p>
+    </div>
+    {% if request.user.id == add.user.id %}
+        <div>
+            <h3><a href="{% url 'main:add_update' add.id %}">Редактировать</a></h3>
+            <form action="{% url 'main:add_delete' add.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Удалить</button>
+            </form>
+        </div>
+
     {% endif %}
 {% endblock %}

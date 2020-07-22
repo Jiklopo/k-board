@@ -3,6 +3,7 @@
     <div>
         <h1>{{ add.title }}</h1>
         <p>{{ add.description }}</p>
+        <h5>Просмотрено {{ add.views }} раз.</h5>
     </div>
     {% if request.user.id == add.user.id %}
         <div>

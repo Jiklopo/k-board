@@ -10,10 +10,15 @@ if webhook_info.url == '' or webhook_info.url != link:
     bot.set_webhook(link)
 
 
+@bot.message_handler(content_types=['text'])
+def test(message):
+    print(message.text)
+    bot.reply_to(message, message.text)
+
+
 def process_updates(json_data):
     bot.process_new_updates(telebot.types.Update.de_json(json_data))
 
 
-@bot.message_handler(commands='week')
-def test(message):
-    bot.reply_to(message, 'Success!')
+if __name__ == '__main__':
+    print('aaa')

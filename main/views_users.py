@@ -4,18 +4,19 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.views import generic
 from django.views.generic import TemplateView
+from main.forms import *
 
 
 class LoginView(views.LoginView):
     template_name = 'users/form.html'
 
 
-class LogoutView(views.LogoutView):
+class LogoutView(LoginRequiredMixin, views.LogoutView):
     template_name = 'index.html'
     redirect_field_name = '/'
 
 
-class ChangePasswordView(views.PasswordChangeView):
+class ChangePasswordView(LoginRequiredMixin, views.PasswordChangeView):
     template_name = 'users/form.html'
 
     def get_success_url(self):
@@ -27,6 +28,27 @@ class RegistrationView(generic.CreateView):
     form_class = UserCreationForm
     success_url = '/'
 
+    def form_valid(self, form):
+        user = form.save()
+        user_info = UserInfo.objects.create(user_id=user.id)
+        return super().form_valid(form)
+
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'users/profile.html'
+
+    def get_context_data(self, **kwargs):
+        adds = Add.objects.filter(user_id=self.request.user.id)
+        return {'adds': adds}
+
+
+class ProfileEditView(LoginRequiredMixin, generic.UpdateView):
+    template_name = 'users/profile_edit.html'
+    form_class = UserInfoForm
+
+    def get_object(self, queryset=None):
+        user_info = UserInfo.objects.get(user_id=self.request.user.id)
+        return user_info
+
+    def get_success_url(self):
+        return reverse('main:profile')

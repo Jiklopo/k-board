@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
 {% block main %}
     <h1>{{ request.user.username }}</h1>
+    <h3><a href="{% url 'main:change_password' %}">Change password</a></h3>
 {% endblock %}

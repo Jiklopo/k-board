@@ -22,7 +22,7 @@ class AddFormView(LoginRequiredMixin, FormView):
     form_class = AddForm
 
     def form_valid(self, form):
-        add = Add(user_id=form.data['user_id'], **form.cleaned_data)
+        add = Add(user_id=self.request.user.id, **form.cleaned_data)
         add.save()
         self.success_url = reverse('main:add_detail', args=[add.id])
         return super().form_valid(form)

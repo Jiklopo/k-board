@@ -18,6 +18,9 @@ class LogoutView(views.LogoutView):
 class ChangePasswordView(views.PasswordChangeView):
     template_name = 'users/form.html'
 
+    def get_success_url(self):
+        return reverse('main:message') + '?message=Password_Changed'
+
 
 class RegistrationView(generic.CreateView):
     template_name = 'users/form.html'

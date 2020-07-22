@@ -10,7 +10,13 @@ class AddsListView(generic.ListView):
     template_name = 'adds/adds.html'
     model = Add
     paginate_by = 20
-    ordering = '-created'
+
+
+class TopAddsListView(generic.ListView):
+    template_name = 'adds/adds.html'
+    model = Add
+    paginate_by = 20
+    ordering = ['-views', '-created']
 
 
 class AddDetailView(generic.DetailView):

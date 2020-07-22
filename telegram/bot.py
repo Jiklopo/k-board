@@ -17,8 +17,4 @@ def test(message):
 
 
 def process_updates(json_data):
-    bot.process_new_updates(telebot.types.Update.de_json(json_data))
-
-
-if __name__ == '__main__':
-    print('aaa')
+    bot.process_new_updates([telebot.types.Update.de_json(json_data)])

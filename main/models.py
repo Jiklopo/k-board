@@ -36,9 +36,13 @@ class Add(models.Model):
     created = models.DateTimeField(editable=False)
     last_modified = models.DateTimeField()
     category = models.IntegerField(choices=AddCategories.choices)
+    views = models.IntegerField(default=0)
 
     def save(self, *args, **kwargs):
         if not self.id:
             self.created = datetime.datetime.now()
         self.last_modified = datetime.datetime.now()
         return super(Add, self).save(*args, **kwargs)
+
+    class Meta:
+        ordering = ['created']

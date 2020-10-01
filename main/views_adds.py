@@ -10,12 +10,24 @@ class AddsListView(generic.ListView):
     template_name = 'adds/adds.html'
     model = Add
     paginate_by = 20
-    ordering = '-created'
+
+
+class TopAddsListView(generic.ListView):
+    template_name = 'adds/adds.html'
+    model = Add
+    paginate_by = 20
+    ordering = ['-views', '-created']
 
 
 class AddDetailView(generic.DetailView):
     template_name = 'adds/add.html'
     model = Add
+
+    def get_object(self, queryset=None):
+        add = super().get_object()
+        add.views += 1
+        add.save()
+        return add
 
 
 class AddFormView(LoginRequiredMixin, FormView):
